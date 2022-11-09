@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      }
+    </style>
+
+    <div class="conteinor">
+      <p id="display">
+        <span id="minut">00</span>:<span id="second">00</span>:<span id="doli"
+          >00</span
+        >
+      </p>
+      <button id="start">start</button>
+      <button id="stop">stop</button>
+      <button id="restart">reset</button>
+    </div>
+
+    <script>
+      let startBtn = document.querySelector("#start");
+      let stopBtn = document.querySelector("#stop");
+      let second = document.querySelector("#second");
+      let minut = document.querySelector("#minut");
+      let doli = document.querySelector("#doli");
+      let restartBtn = document.querySelector("#restart");
+      let interval;
+      var i = 0;
+      var j = 0;
+      var k = 0;
+      let d;
+      let m;
+      let t;
+      let check = true;
+      startBtn.addEventListener("click", startInterval);
+      stopBtn.addEventListener("click", stop);
+      restartBtn.addEventListener("click", restart);
+
+      function startInterval() {
+        if (check == true) {
+          interval = window.setInterval(start, 10);
+        } else {
+          clearInterval(interval);
+        }
+      }
+      function start() {
+        i++;
+        if (i == 100) {
+          i = 0;
+          j++;
+        }
+        if (j == 60) {
+          j = 0;
+          k++;
+        }
+        if (i < 10) {
+          d = "0";
+          d += i;
+        } else {
+          d = 0;
+          d += i;
+        }
+        if (j < 10) {
+          m = "0";
+          m += j;
+        } else {
+          m = 0;
+          m += j;
+        }
+        if (k < 10) {
+          t = "0";
+          t += k;
+        } else {
+          t = 0;
+          t += k;
+        }
+        doli.innerText = d;
+        second.innerText = m;
+        minut.innerText = t;
+      }
+      function stop() {
+        clearInterval(interval);
+      }
+      function restart() {
+        // document.getElementById("display").innerHTML = "00:00:00";
+        i = -1;
+        j = 0;
+        k = 0;
+        start();
+        stop();
+
+        // document.getElementById("display").innerHTML = "00:00:00";
+        // interval = setInterval(start, 10);
+        check = true;
+      }
+    </script>
+  </body>
+</html>
